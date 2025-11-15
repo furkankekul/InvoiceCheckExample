@@ -1,0 +1,15 @@
+﻿{
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:5185",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionString": "Host=localhost;Port=5432;Database=invoice_db;Username=postgres;Password=postgres"
+      }
+    }
+  }
+}
