@@ -32,10 +32,6 @@ namespace InvoiceCheckExample.Controllers
             }
 
             var responseModel = _mockInvoiceService.GetMockResponse(invoiceNumber, taxNumber);
-            if (responseModel == null)
-            {
-                return Ok("Şirkete ait böyle bir fatura bulunmamaktadır.");
-            }
 
             string cacheKey = $"{taxNumber}-{invoiceNumber}";
             invoiceStatusLog.InvoiceNumber = invoiceNumber;
@@ -75,12 +71,11 @@ namespace InvoiceCheckExample.Controllers
                 return Ok(invoiceStatusLog);
             }
 
-            {
-                invoiceStatusLog.ResponseCode = responseModel.ResponseCode;
-                invoiceStatusLog.ResponseMessage = responseModel.Message;
+            invoiceStatusLog.ResponseCode = responseModel.ResponseCode;
+            invoiceStatusLog.ResponseMessage = responseModel.Message;
 
-                _invoiceStatusLogDataAccessor.Add(invoiceStatusLog);
-                Console.WriteLine($@"
+            _invoiceStatusLogDataAccessor.Add(invoiceStatusLog);
+            Console.WriteLine($@"
                 CorrelationId: {correlationId}, 
                 <-------------------------------------------------->
                 Request: 
@@ -97,8 +92,8 @@ namespace InvoiceCheckExample.Controllers
                 ResponseMessage: {invoiceStatusLog.ResponseMessage};
                 DateTime: {invoiceStatusLog.RequestTime} 
                 ");
-                return Ok(invoiceStatusLog);
-            }
+            return Ok(invoiceStatusLog);
+
         }
     }
 }
